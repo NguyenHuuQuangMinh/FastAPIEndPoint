@@ -17,7 +17,7 @@ def test_invalid_year():
     response = client.post("/weather", json={
         "lon": 105.85,
         "lat": 21.02,
-        "start_year": 2050,
+        "start_year": 2024,
         "end_year": 2023
     })
     assert response.status_code == 422
@@ -31,7 +31,7 @@ def test_start_year():
         "end_year": 2050
     })
     assert response.status_code == 422
-    assert "Năm kết thúc không thể lớn hơn năm hiện tại" in response.json()["detail"]
+    assert "Năm bắt đầu không thể lớn hơn năm hiện tại" in response.json()["detail"]
 
 def test_future_end_year():
     response = client.post("/weather", json={
